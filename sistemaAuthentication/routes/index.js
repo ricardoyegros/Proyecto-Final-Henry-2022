@@ -6,10 +6,12 @@ const { User } = require("../server/db.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+
+
 router.post("/register", async (req, res) => {
-    
+    const saltRounds = 11;
     let { name, contact, email, address, password } = req.body;
-    const saltRounds = 10;
+    
     try {
         if (!name || !contact || !email || !address || !password) {
             return res.status(400).send("The field is required");
@@ -78,6 +80,6 @@ router.post("/login", async (req, res) => {
     }
 
     
-});
+});                     
 
 module.exports = router;
