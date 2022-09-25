@@ -7,8 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 
-
-//Rutas a DB-User
+//==============ruta para registrar usuarios=====================//
 
 router.post("/register", async (req, res) => {
     const saltRounds = 11;
@@ -16,7 +15,7 @@ router.post("/register", async (req, res) => {
     
     try {
         if (!name || !contact || !email || !address || !password) {
-            return res.status(400).send("The field is required");
+            return res.status(400).send("The field is incorrect/empty please validate");
         }
         
         const users = await User.findAll();
@@ -29,7 +28,7 @@ router.post("/register", async (req, res) => {
         );
 
         if (exists) {
-            res.status(400).send("Ya existe un usuario con estas propiedades.");
+            res.status(400).send("A user with these credentials already exists.");
             return;
         }
 
@@ -45,7 +44,6 @@ router.post("/register", async (req, res) => {
             res.status(201).send(newUser);
         });
 
-        
         return;
         
     } catch (error) {
@@ -55,6 +53,9 @@ router.post("/register", async (req, res) => {
     res.status(201).redirect("/login");
 });
 
+
+
+//=============>>>>>>Ruta para login con authenticacion<<<<<<=============//
 
 
 
@@ -71,17 +72,19 @@ router.post("/login", async (req, res) => {
                 if (result === true) {
                     const token = jwt.sign({ id: user.id }, JWT_SECRET);
                     // req.session.userId = user.id;  ||------->>>>>> metodo de cookies
-                    return res.status(200).send({
-                        token,
-                    });
-                } else {
-                    console.log("Clave incorrecta.");
-                    return res.status(404).send("Clave incorrecta.");
-                }
+                    return res.status(200).redirect("/home");
+                    //return res.status(200).send({token});
+                }  else {
+                    console.log("Incorrect key.");
+                    return res.redirect("/register");
+                    //res.status(404).send("Incorrect key.");
+                } 
+
+               
             });
         } else {
             console.log("User not found");
-            return res.status(404).send("No se encontro el usuario.");
+            return res.status(404).send("User not found.");
         }
     }
 
