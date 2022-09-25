@@ -6,6 +6,7 @@ const routes = require("../routes/index.js");
 const server = express();
 const cors = require("cors");
 
+require('./db.js')
 
 // server.name = "Authentication";
 

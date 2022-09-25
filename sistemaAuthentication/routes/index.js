@@ -8,6 +8,8 @@ const bcrypt = require("bcrypt");
 
 
 
+//Rutas a DB-User
+
 router.post("/register", async (req, res) => {
     const saltRounds = 11;
     let { name, contact, email, address, password } = req.body;
@@ -52,6 +54,10 @@ router.post("/register", async (req, res) => {
 
     res.status(201).redirect("/login");
 });
+
+
+
+
 
 router.post("/login", async (req, res) => {
     const { JWT_SECRET } = process.env;
