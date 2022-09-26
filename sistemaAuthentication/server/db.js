@@ -47,7 +47,7 @@ Brand.belongsTo(Product)
 Product.hasMany(Category)
 Category.belongsTo(Product)
 
-Image.hasMany(Product)
+Image.hasMany(Product)    ///========>>>>corregir
 Product.belongsTo(Image)
 
 

@@ -1,11 +1,17 @@
 const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize)=>{
-    sequelize.define('Image',{
+    sequelize.define('image',{
+        
+        name:{
+                type:DataTypes.STRING,
+                allowNull: false
+        },
+/* 
         url:{
             type: DataTypes.STRING,
-            allowNull: false
-        }
+            allowNull: true
+        } */
     },
     { timestamps: false }
     )

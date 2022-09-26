@@ -2,10 +2,10 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize)=>{
     sequelize.define(
-        'Brand',
+        'brand',
         {
 
-        description:{
+        name:{
             type: DataTypes.STRING,
             allowNull: false
         }
